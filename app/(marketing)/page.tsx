@@ -1,3 +1,4 @@
+"use client";
 import { GithubCard } from "@/components/github-card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
@@ -9,12 +10,21 @@ import { FAQ } from '@/components/faq';
 import { freePlan, basicPlan, proPlan } from "@/config/subscriptions";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import useLanguage from "../../hooks/useLanguage";
+import {translations} from "../../config/locales";
+import LanguageSwitcher from "../../config/LanguageSwitcher";
 
 export default function IndexPage() {
+  const { language } = useLanguage();
 
   return (
     <>
       <section data-aos="fade-up" className="space-y-6 pb-8 pt-6 md:pb-12 md:pt-10 py-12 md:py-24 lg:py-32">
+        <div>
+          <h1>{translations[language]?.welcome || "Welcome"}</h1>
+          <p>{translations[language]?.description || "Default text"}</p>
+          <LanguageSwitcher />
+        </div>
         <div className="container flex max-w-[64rem] flex-col items-center gap-4 text-center">
           <Link
             href={siteConfig.links.twitter}
